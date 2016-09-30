@@ -1,5 +1,7 @@
 
 # sample dataframe. Add your own for testing.
+# The script assume the text is previously cleaned from extraneous words or symbols
+# The upper limit is in the millions range.
 
 df <- data.frame( 
 var1 = c("UNO","DOS MIL CUATROCIENTOS DIECISIETE","CUATRO MIL SEISCIENTOS TREINTA Y OCHO","setentaydosmil ciento cuarentaycuatro","novecientos ochenta y nueve millones seiscientos treinta y dos mil doscientos cuarenta y ocho"),
