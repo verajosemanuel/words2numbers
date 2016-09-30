@@ -98,7 +98,7 @@ df$res4 <- sapply(newdf$expr4, function(x) eval(parse(text = paste0("",x))))
 res <- cbind(df,newdf)
 
 
-# reorder columns for better checking accuracy
+# reorder columns for better accuracy check
 
 res <- res[c("var1","expr1","res1","var2","expr2","res2","var3","expr3","res3","var4","expr4","res4")]
 
