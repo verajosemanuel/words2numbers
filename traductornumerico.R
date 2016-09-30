@@ -1,5 +1,5 @@
-# The script assume the text is previously extracted & cleaned from their documents
-# removed extraneous words or symbols, and placed in a data frame
+# The script assume the text is previously extracted from their documents
+# cleaned & removed extraneous words or symbols, and placed in a data frame
 # The upper limit is in the millions range.
 
 
