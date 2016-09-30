@@ -1,5 +1,7 @@
-# The script assume the text is previously extracted from their documents
-# cleaned & removed extraneous words or symbols, and placed in a data frame
+# ASSUMPTIONS:
+# text is previously extracted from their documents and cleaned
+# removed extraneous words or symbols, and placed into a data frame
+# Quantities are written in a correct Spanish
 # The upper limit is in the millions range.
 
 
