@@ -87,12 +87,16 @@ newdf <- reemplazar(df)
 names(newdf) <- c("expr1","expr2","expr3","expr4")
 
 
-# eval+parse only returned the last operation, so a function did not worked (yet)
+# eval+parse only returned the last operation, so apply on a data frame did not worked
+# splitted and executed using sapply, one for each column 
 
-df$res1 <- sapply(newdf$expr1, function(x) eval(parse(text = paste0("",x))))
-df$res2 <- sapply(newdf$expr2, function(x) eval(parse(text = paste0("",x))))
-df$res3 <- sapply(newdf$expr3, function(x) eval(parse(text = paste0("",x))))
-df$res4 <- sapply(newdf$expr4, function(x) eval(parse(text = paste0("",x))))
+for (i in 1:ncol(df)) {
+  
+  evaluar <- paste0("df$res", i , " <- sapply(newdf$expr",i,", function(x) eval(parse(text = paste0('',x))))")
+  # print(evaluar)
+  eval(parse( text = evaluar ))
+  
+}
 
 
 # concat original and parsed data frames
