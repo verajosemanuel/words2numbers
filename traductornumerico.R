@@ -3,6 +3,10 @@
 # The upper limit is in the millions range.
 
 
+# memory cleaning
+
+rm(list = ls())
+
 # sample dataframe. Add your own for testing.
 
 df <- data.frame( 
