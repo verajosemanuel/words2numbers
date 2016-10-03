@@ -17,8 +17,10 @@ var2 = c("DOS","CINCO MIL NOVECIENTOS VEINTE","DOS MILLONES QUINIENTOS VEINTISIE
 var3 = c("tres","veintiDOS MIL seiscientos cincuentayocho","noventaynueve mil ciento dos","ochocientos veinte","Novecientos ochenta y siete millones ochocientos sesenta y cinco mil cuatrocientos cincuenta y seis"),
 var4 = c("cuatro","trescientos treintaydosmil cientoveintiocho","doscientosmil","noventa y nueve","Doscientos treinta y cinco mil ciento sesentaynueve"))
 
+# TWO OPTIONAL FUNCTIONS PROVIDED for replacing words with their numerical counterpart
+# it's a matter of taste. No apparent performance gain is noticed
 
-# function for replacing words with their numerical counterpart
+# First option: no piping, just plain sapply+gsub
 
 reemplazar <- function(x) {
 
@@ -76,6 +78,68 @@ reemplazar <- function(x) {
 
  return(x)
 }
+
+
+# Second option: piping with magrittR
+
+library(magrittr)
+
+reemplazar <- function(x) {
+  
+x <- sapply(x, function(x) {gsub("once", "+11", x , ignore.case = T) %>%
+    gsub("doce", "+12", . , ignore.case = T ) %>%
+    gsub("trece", "+13", . , ignore.case = T) %>%
+    gsub("catorce", "+14", . , ignore.case = T) %>%
+    gsub("quince", "+15", . , ignore.case = T) %>% 
+    gsub("dieciseis", "+16", . , ignore.case = T) %>%
+    gsub("diecisiete|diez y siete", "+17", . , ignore.case = T) %>%
+    gsub("dieciocho", "+18", . , ignore.case = T) %>%
+    gsub("diecinueve", "+19", . , ignore.case = T) %>%
+    gsub("veinte", "+20", . , ignore.case = T) %>%
+    gsub("veinti", "+20", . , ignore.case = T) %>%
+    gsub("treinta", "+30", . , ignore.case = T) %>%
+    gsub("cuarenta", "+40", . , ignore.case = T) %>%
+    gsub("cincuenta", "+50", . , ignore.case = T) %>%
+    gsub("sesenta", "+60", . , ignore.case = T) %>%
+    gsub("setenta", "+70", . , ignore.case = T) %>%
+    gsub("ochenta", "+80", . , ignore.case = T) %>%
+    gsub("noventa", "+90", . , ignore.case = T) %>%
+    gsub("doscientos", "+200", . , ignore.case = T) %>%
+    gsub("trescientos", "+300", . , ignore.case = T) %>%
+    gsub("cuatrocientos", "+400", . , ignore.case = T) %>%
+    gsub("quinientos", "+500", . , ignore.case = T) %>%
+    gsub("seiscientos", "+600", . , ignore.case = T) %>%
+    gsub("setecientos", "+700", . , ignore.case = T) %>%
+    gsub("ochocientos", "+800", . , ignore.case = T) %>%
+    gsub("novecientos", "+900", . , ignore.case = T) %>%
+    gsub("uno", "+1", . , ignore.case = T) %>%
+    gsub("dos", "+2", . , ignore.case = T) %>%
+    gsub("tres", "+3", . , ignore.case = T) %>%
+    gsub("cuatro", "+4", . , ignore.case = T) %>%
+    gsub("cinco", "+5", . , ignore.case = T) %>%
+    gsub("seis", "+6", . , ignore.case = T) %>%
+    gsub("siete", "+7", . , ignore.case = T) %>%
+    gsub("ocho", "+8", . , ignore.case = T) %>%
+    gsub("nueve", "+9", . , ignore.case = T) %>%
+    gsub("millones", ")*(1000000)+(0", . , ignore.case = T) %>%
+    gsub("millon", ")*(1000000)+(0", . , ignore.case = T) %>%
+    gsub("mil", ")*(1000)+(0", . , ignore.case = T) %>%
+    gsub("ciento", "+100", . , ignore.case = T) %>%
+    gsub("cien", "+100", . , ignore.case = T) %>%
+    gsub("diez", "+10", . , ignore.case = T) %>%
+    gsub("Y", "", . , ignore.case = T) %>%
+    gsub(" ", "", . , ignore.case = T) %>%
+    gsub("^", "(0", . , ignore.case = T) %>%
+    gsub("$", ")", . , ignore.case = T)
+    
+})
+
+return(as.data.frame(x))
+
+}
+
+
+# ################################
 
 # replace dataframe
 
