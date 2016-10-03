@@ -34,8 +34,7 @@ reemplazar <- function(x) {
   x <- as.data.frame(sapply(x,gsub,pattern = "DIECIOCHO", replacement = "+18", ignore.case = T) )
   x <- as.data.frame(sapply(x,gsub,pattern = "DIECINUEVE", replacement = "+19", ignore.case = T) )
   
-  x <- as.data.frame(sapply(x,gsub,pattern = "VEINTE", replacement = "+20", ignore.case = T) )
-  x <- as.data.frame(sapply(x,gsub,pattern = "VEINTI", replacement = "+20", ignore.case = T) )
+  x <- as.data.frame(sapply(x,gsub,pattern = "VEINTE|VEINTI", replacement = "+20", ignore.case = T) )
   x <- as.data.frame(sapply(x,gsub,pattern = "TREINTA", replacement = "+30", ignore.case = T) )
   x <- as.data.frame(sapply(x,gsub,pattern = "CUARENTA", replacement = "+40", ignore.case = T) )
   x <- as.data.frame(sapply(x,gsub,pattern = "CINCUENTA", replacement = "+50", ignore.case = T) )
@@ -96,8 +95,7 @@ x <- sapply(x, function(x) {gsub("once", "+11", x , ignore.case = T) %>%
     gsub("diecisiete|diez y siete", "+17", . , ignore.case = T) %>%
     gsub("dieciocho", "+18", . , ignore.case = T) %>%
     gsub("diecinueve", "+19", . , ignore.case = T) %>%
-    gsub("veinte", "+20", . , ignore.case = T) %>%
-    gsub("veinti", "+20", . , ignore.case = T) %>%
+    gsub("veinte|veinti", "+20", . , ignore.case = T) %>%
     gsub("treinta", "+30", . , ignore.case = T) %>%
     gsub("cuarenta", "+40", . , ignore.case = T) %>%
     gsub("cincuenta", "+50", . , ignore.case = T) %>%
