@@ -69,6 +69,7 @@ reemplazar <- function(x) {
   x <- as.data.frame(sapply(x,gsub,pattern = "CIENTO", replacement = "+100", ignore.case = T) )
   x <- as.data.frame(sapply(x,gsub,pattern = "CIEN", replacement = "+100", ignore.case = T) )
   x <- as.data.frame(sapply(x,gsub,pattern = "DIEZ", replacement = "+10", ignore.case = T) )
+  x <- as.data.frame(sapply(x,gsub,pattern = "UN", replacement = "+1", ignore.case = T) )
   
   x <- as.data.frame(sapply(x,gsub,pattern = "Y", replacement = "", ignore.case = T) )
   x <- as.data.frame(sapply(x,gsub,pattern = " ", replacement = "", ignore.case = T) )
@@ -127,6 +128,7 @@ x <- sapply(x, function(x) {gsub("once", "+11", x , ignore.case = T) %>%
     gsub("ciento", "+100", . , ignore.case = T) %>%
     gsub("cien", "+100", . , ignore.case = T) %>%
     gsub("diez", "+10", . , ignore.case = T) %>%
+    gsub("un", "+1", . , ignore.case = T) %>%
     gsub("Y", "", . , ignore.case = T) %>%
     gsub(" ", "", . , ignore.case = T) %>%
     gsub("^", "(0", . , ignore.case = T) %>%
