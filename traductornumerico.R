@@ -1,8 +1,8 @@
 # ASSUMPTIONS:
-# text is previously extracted from their documents and cleaned
-# removed extraneous words or symbols, and placed into a data frame
-# Quantities are written in a correct Spanish
-# The upper limit is in the millions range.
+# text is previously extracted from documents and cleaned &
+# removed extraneous words or symbols, then placed into a data frame
+# Quantities MUST be written in a correct Spanish (this is not a grammar tool)
+# The upper limit is up to the millions range.
 
 
 # memory cleaning
@@ -18,7 +18,7 @@ var3 = c("tres","veintiDOS MIL seiscientos cincuentayocho","noventaynueve mil ci
 var4 = c("cuatro","trescientos treintaydosmil cientoveintiocho","doscientosmil","noventa y nueve","Doscientos treinta y cinco mil ciento sesentaynueve"))
 
 # TWO OPTIONAL FUNCTIONS PROVIDED for replacing words with their numerical counterpart
-# it's a matter of taste. No apparent performance gain is noticed
+# it's a matter of taste. No apparent performance gain is noticed. Choose one.
 
 # First option: no piping, just plain sapply+gsub
 
