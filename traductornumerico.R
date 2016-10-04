@@ -17,10 +17,10 @@ var2 = c("DOS","CINCO MIL NOVECIENTOS VEINTE","DOS MILLONES QUINIENTOS VEINTISIE
 var3 = c("tres","veintiDOS MIL seiscientos cincuentayocho","noventaynueve mil ciento dos","ochocientos veinte","Novecientos ochenta y siete millones ochocientos sesenta y cinco mil cuatrocientos cincuenta y seis"),
 var4 = c("cuatro","trescientos treintaydosmil cientoveintiocho","doscientosmil","noventa y nueve","Doscientos treinta y cinco mil ciento sesentaynueve"))
 
-# TWO OPTIONAL FUNCTIONS PROVIDED for replacing words with their numerical counterpart
-# it's a matter of taste. No apparent performance gain is noticed. Choose one.
+# 3 OPTIONAL FUNCTIONS PROVIDED for replacing words with their numerical counterpart
+# magrittr+gsub version is the slowest but most readable. Suitable for small datasets only. 
 
-# First option: no piping, just plain sapply+gsub
+# First option: no piping, just plain sapply+gsub. Microbenchmark mean: 5.47 median: 5.18
 
 reemplazar <- function(x) {
 
@@ -80,7 +80,7 @@ reemplazar <- function(x) {
 }
 
 
-# Second option: piping with magrittR
+# Second option: gsub piping with magrittR. Microbechmark mean: 40.65  median: 39.41
 
 library(magrittr)
 
@@ -137,6 +137,64 @@ x <- sapply(x, function(x) {gsub("once", "+11", x , ignore.case = T) %>%
 return(as.data.frame(x))
 
 }
+
+# Third option: using Stringr+Magritr. Microbechmark mean: 4.01  median: 3.89 [FASTEST]
+
+library(stringr)
+
+reemplazar <- function(x) {
+
+  x <- str_replace_all(x, fixed("once", ignore_case = TRUE),"+11") %>% 
+  str_replace_all(fixed("doce", ignore_case = TRUE), "+12") %>% 
+  str_replace_all(fixed("trece", ignore_case = TRUE), "+13") %>%
+  str_replace_all(fixed("catorce", ignore_case = TRUE), "+14") %>%
+  str_replace_all(fixed("quince", ignore_case = TRUE), "+15") %>% 
+  str_replace_all(fixed("dieciseis", ignore_case = TRUE), "+16") %>%
+  str_replace_all(fixed("diecisiete", ignore_case = TRUE), "+17") %>%
+  str_replace_all(fixed("dieciocho", ignore_case = TRUE), "+18") %>%
+  str_replace_all(fixed("diecinueve", ignore_case = TRUE), "+19") %>%
+  str_replace_all(fixed("veinte", ignore_case = TRUE), "+20") %>%
+  str_replace_all(fixed("veinti", ignore_case = TRUE), "+20") %>%
+  str_replace_all(fixed("treinta", ignore_case = TRUE), "+30") %>%
+  str_replace_all(fixed("cuarenta", ignore_case = TRUE), "+40") %>%
+  str_replace_all(fixed("cincuenta", ignore_case = TRUE), "+50") %>%
+  str_replace_all(fixed("sesenta", ignore_case = TRUE), "+60") %>%
+  str_replace_all(fixed("setenta", ignore_case = TRUE), "+70") %>%
+  str_replace_all(fixed("ochenta", ignore_case = TRUE), "+80") %>%
+  str_replace_all(fixed("noventa", ignore_case = TRUE), "+90") %>%
+  str_replace_all(fixed("doscientos", ignore_case = TRUE), "+200") %>%
+  str_replace_all(fixed("trescientos", ignore_case = TRUE), "+300") %>%
+  str_replace_all(fixed("cuatrocientos", ignore_case = TRUE), "+400") %>%
+  str_replace_all(fixed("quinientos", ignore_case = TRUE), "+500") %>%
+  str_replace_all(fixed("seiscientos", ignore_case = TRUE), "+600") %>%
+  str_replace_all(fixed("setecientos", ignore_case = TRUE), "+700") %>%
+  str_replace_all(fixed("ochocientos", ignore_case = TRUE), "+800") %>%
+  str_replace_all(fixed("novecientos", ignore_case = TRUE), "+900") %>%
+  str_replace_all(fixed("uno", ignore_case = TRUE), "+1") %>%
+  str_replace_all(fixed("dos", ignore_case = TRUE), "+2") %>%
+  str_replace_all(fixed("tres", ignore_case = TRUE), "+3") %>%
+  str_replace_all(fixed("cuatro", ignore_case = TRUE), "+4") %>%
+  str_replace_all(fixed("cinco", ignore_case = TRUE), "+5") %>%
+  str_replace_all(fixed("seis", ignore_case = TRUE), "+6") %>%
+  str_replace_all(fixed("siete", ignore_case = TRUE), "+7") %>%
+  str_replace_all(fixed("ocho", ignore_case = TRUE), "+8") %>%
+  str_replace_all(fixed("nueve", ignore_case = TRUE), "+9") %>%
+  str_replace_all(fixed("millones", ignore_case = TRUE), ")*(1000000)+(0") %>%
+  str_replace_all(fixed("millon", ignore_case = TRUE), ")*(1000000)+(0") %>%
+  str_replace_all(fixed("mil", ignore_case = TRUE), ")*(1000)+(0") %>%
+  str_replace_all(fixed("ciento", ignore_case = TRUE), "+100") %>%
+  str_replace_all(fixed("cien", ignore_case = TRUE), "+100") %>%
+  str_replace_all(fixed("diez", ignore_case = TRUE), "+10") %>%
+  str_replace_all(fixed("un", ignore_case = TRUE), "+1") %>%
+  str_replace_all(fixed("Y", ignore_case = TRUE), "") %>%
+  str_replace_all(fixed(" ", ignore_case = TRUE), "") %>%
+  str_replace_all(regex("^", ignore_case = TRUE), "(0") %>%
+  str_replace_all(regex("$", ignore_case = TRUE), ")")
+  
+  return(as.data.frame(x))
+  
+}
+
 
 
 # ################################
