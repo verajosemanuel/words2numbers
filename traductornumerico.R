@@ -83,7 +83,7 @@ x[] <- lapply(x, function(x) {gsub("^mil", "1000)+", x , ignore.case = T) %>%
     
 })
 
-return(x)
+  return(Vectorize(eval(parse( text = x))))
 
 }
 
