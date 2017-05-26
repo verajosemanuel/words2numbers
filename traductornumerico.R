@@ -31,7 +31,7 @@ library(magrittr)
 
 reemplazar <- function(x) {
   
-x[] <- lapply(x, function(x) {gsub("^mil", "1000)+", x , ignore.case = T) %>%
+ x[] <- gsub("^mil", "1000)+", x , ignore.case = T) %>%
     gsub("once", "+11", . , ignore.case = T) %>%
     gsub("doce", "+12", . , ignore.case = T ) %>%
     gsub("trece", "+13", . , ignore.case = T) %>%
@@ -80,8 +80,6 @@ x[] <- lapply(x, function(x) {gsub("^mil", "1000)+", x , ignore.case = T) %>%
     gsub("\\(0\\(", "", . , ignore.case = T ) %>%
     gsub("\\+\\+", "\\+\\(", . , ignore.case = T ) %>%
     gsub("\\)\\+\\)", "\\)", . , ignore.case = T )
-    
-})
 
   return(Vectorize(eval(parse( text = x))))
 
