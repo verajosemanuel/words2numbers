@@ -4,11 +4,6 @@
 # Quantities MUST be written in a correct Spanish (this is not a grammar tool)
 # The upper limit is up to the millions range.
 
-
-# memory cleaning
-
-rm(list = ls())
-
 # sample dataframe. Add your own for testing.
 
 df <- data.frame( 
