@@ -29,92 +29,61 @@ df <- data.frame(
 
 library(magrittr)
 
-reemplazar <- function(x) {
+to_number <- function(x) {
   
- x[] <- gsub("^mil", "1000)+", x , ignore.case = T) %>%
-    gsub("once", "+11", . , ignore.case = T) %>%
-    gsub("doce", "+12", . , ignore.case = T ) %>%
-    gsub("trece", "+13", . , ignore.case = T) %>%
-    gsub("catorce", "+14", . , ignore.case = T) %>%
-    gsub("quince", "+15", . , ignore.case = T) %>% 
-    gsub("dieciseis", "+16", . , ignore.case = T) %>%
-    gsub("diecisiete|diez y siete", "+17", . , ignore.case = T) %>%
-    gsub("dieciocho", "+18", . , ignore.case = T) %>%
-    gsub("diecinueve", "+19", . , ignore.case = T) %>%
-    gsub("veinte|veinti", "+20", . , ignore.case = T) %>%
-    gsub("treinta", "+30", . , ignore.case = T) %>%
-    gsub("cuarenta", "+40", . , ignore.case = T) %>%
-    gsub("cincuenta", "+50", . , ignore.case = T) %>%
-    gsub("sesenta", "+60", . , ignore.case = T) %>%
-    gsub("setenta", "+70", . , ignore.case = T) %>%
-    gsub("ochenta", "+80", . , ignore.case = T) %>%
-    gsub("noventa", "+90", . , ignore.case = T) %>%
-    gsub("doscientos", "+200", . , ignore.case = T) %>%
-    gsub("trescientos", "+300", . , ignore.case = T) %>%
-    gsub("cuatrocientos", "+400", . , ignore.case = T) %>%
-    gsub("quinientos", "+500", . , ignore.case = T) %>%
-    gsub("seiscientos", "+600", . , ignore.case = T) %>%
-    gsub("setecientos", "+700", . , ignore.case = T) %>%
-    gsub("ochocientos", "+800", . , ignore.case = T) %>%
-    gsub("novecientos", "+900", . , ignore.case = T) %>%
-    gsub("uno", "+1", . , ignore.case = T) %>%
-    gsub("dos", "+2", . , ignore.case = T) %>%
-    gsub("tres", "+3", . , ignore.case = T) %>%
-    gsub("cuatro", "+4", . , ignore.case = T) %>%
-    gsub("cinco", "+5", . , ignore.case = T) %>%
-    gsub("seis", "+6", . , ignore.case = T) %>%
-    gsub("siete", "+7", . , ignore.case = T) %>%
-    gsub("ocho", "+8", . , ignore.case = T) %>%
-    gsub("nueve", "+9", . , ignore.case = T) %>%
-    gsub("millones", ")*(1000000)+(0", . , ignore.case = T) %>%
-    gsub("millon", ")*(1000000)+(0", . , ignore.case = T) %>%
-    gsub("mil", ")*(1000)+(0", . , ignore.case = T) %>%
-    gsub("ciento", "+100", . , ignore.case = T) %>%
-    gsub("cien", "+100", . , ignore.case = T) %>%
-    gsub("diez", "+10", . , ignore.case = T) %>%
-    gsub("un", "+1", . , ignore.case = T) %>%
-    gsub("Y", "", . , ignore.case = T) %>%
-    gsub(" ", "", . , ignore.case = T) %>%
-    gsub("^", "(0", . , ignore.case = T) %>%
-    gsub("$", ")", . , ignore.case = T) %>%
-    gsub("\\(0\\(", "", . , ignore.case = T ) %>%
-    gsub("\\+\\+", "\\+\\(", . , ignore.case = T ) %>%
-    gsub("\\)\\+\\)", "\\)", . , ignore.case = T )
 
-  return(Vectorize(eval(parse( text = x))))
+  x <- gsub("^mil", "1000)+", x , ignore.case = T) %>%
+      gsub("once", "+11", . , ignore.case = T) %>%
+      gsub("doce", "+12", . , ignore.case = T ) %>%
+      gsub("trece", "+13", . , ignore.case = T) %>%
+      gsub("catorce", "+14", . , ignore.case = T) %>%
+      gsub("quince", "+15", . , ignore.case = T) %>%
+      gsub("dieciseis", "+16", . , ignore.case = T) %>%
+      gsub("diecisiete|diez y siete", "+17", . , ignore.case = T) %>%
+      gsub("dieciocho", "+18", . , ignore.case = T) %>%
+      gsub("diecinueve", "+19", . , ignore.case = T) %>%
+      gsub("veinte|veinti", "+20", . , ignore.case = T) %>%
+      gsub("treinta", "+30", . , ignore.case = T) %>%
+      gsub("cuarenta", "+40", . , ignore.case = T) %>%
+      gsub("cincuenta", "+50", . , ignore.case = T) %>%
+      gsub("sesenta", "+60", . , ignore.case = T) %>%
+      gsub("setenta", "+70", . , ignore.case = T) %>%
+      gsub("ochenta", "+80", . , ignore.case = T) %>%
+      gsub("noventa", "+90", . , ignore.case = T) %>%
+      gsub("doscientos", "+200", . , ignore.case = T) %>%
+      gsub("trescientos", "+300", . , ignore.case = T) %>%
+      gsub("cuatrocientos", "+400", . , ignore.case = T) %>%
+      gsub("quinientos", "+500", . , ignore.case = T) %>%
+      gsub("seiscientos", "+600", . , ignore.case = T) %>%
+      gsub("setecientos", "+700", . , ignore.case = T) %>%
+      gsub("ochocientos", "+800", . , ignore.case = T) %>%
+      gsub("novecientos", "+900", . , ignore.case = T) %>%
+      gsub("uno", "+1", . , ignore.case = T) %>%
+      gsub("dos", "+2", . , ignore.case = T) %>%
+      gsub("tres", "+3", . , ignore.case = T) %>%
+      gsub("cuatro", "+4", . , ignore.case = T) %>%
+      gsub("cinco", "+5", . , ignore.case = T) %>%
+      gsub("seis", "+6", . , ignore.case = T) %>%
+      gsub("siete", "+7", . , ignore.case = T) %>%
+      gsub("ocho", "+8", . , ignore.case = T) %>%
+      gsub("nueve", "+9", . , ignore.case = T) %>%
+      gsub("millones", ")*(1000000)+(0", . , ignore.case = T) %>%
+      gsub("millon", ")*(1000000)+(0", . , ignore.case = T) %>%
+      gsub("mil", ")*(1000)+(0", . , ignore.case = T) %>%
+      gsub("ciento", "+100", . , ignore.case = T) %>%
+      gsub("cien", "+100", . , ignore.case = T) %>%
+      gsub("diez", "+10", . , ignore.case = T) %>%
+      gsub("un", "+1", . , ignore.case = T) %>%
+      gsub("Y", "", . , ignore.case = T) %>%
+      gsub(" ", "", . , ignore.case = T) %>%
+      gsub("^", "(0", . , ignore.case = T) %>%
+      gsub("$", ")", . , ignore.case = T) %>%
+      gsub("\\(0\\(", "", . , ignore.case = T ) %>%
+      gsub("\\+\\+", "\\+\\(", . , ignore.case = T ) %>%
+      gsub("\\)\\+\\)", "\\)", . , ignore.case = T )
 
+
+  return(as.integer(eval(parse( text = x))))
 }
 
-
-# replace dataframe
-
-newdf <- reemplazar(df)
-
-
-# change dataframe colnames for better describing their actual content (math expression)
-
-names(newdf) <- c("expr1","expr2")
-
-
-# eval+parse only returned the last operation, so apply on a data frame did not worked
-# splitted and executed using sapply, one for each column 
-
-for (i in 1:ncol(newdf)) {
-  
-  evaluar <- paste0("newdf$res", i , " <- sapply(newdf$expr",i,", function(x) eval(parse(text = paste0('',x))))")
-  # print(evaluar)
-  eval(parse( text = evaluar ))
-  
-}
-
-res <- as.data.frame(cbind(df,newdf))
-
-res <- res[c("var1","expr1","res1","var2","expr2","res2")]
-
-res
-
-# if an Excel file is needed
-
-library(rio)
-
-export(res, file = "cifrasyletras.xlsx" , format = "xlsx" )
+df$var3 <- lapply(df$var2, to_number)
