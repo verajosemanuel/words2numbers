@@ -2,4 +2,4 @@
 
 ## Functionality from this project is now on ESmisc package.
 
-## Try ESmisc instead.
+## Try ESmisc instead.  https://github.com/verajosemanuel/ESmisc
