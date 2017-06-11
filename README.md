@@ -1,7 +1,5 @@
-# words2numbers
+# words2numbers is Deprecated. 
 
-## Deprecated. 
-
-## Functionality from this project is now on ESmisc packlage.
+## Functionality from this project is now on ESmisc package.
 
 ## Try ESmisc instead.
